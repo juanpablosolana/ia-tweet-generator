@@ -1,11 +1,11 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import cohere from 'cohere-ai'
-import cohereData  from '../../services/ia'
+import cohereData  from '@/services/ia'
 cohere.init(process.env.COHERE_API_KEY); // This is your trial API key
 
 export default function handler(req, res) {
   const { magic } = req.query
-    async function makeTweet (){
+    async function makeTweet () {
     const response = await cohere.generate(cohereData(magic));
     const { statusCode } = response;
     const { body } = response;

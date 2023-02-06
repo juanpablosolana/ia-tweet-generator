@@ -62,12 +62,11 @@ export default function Home() {
                <button>Generate!</button>
               </form>
             }
-
           </div>
           <textarea
             id="amazingTweet"
             name="amazingTweet"
-            value={message}
+            defaultValue={message}
             rows="8"
             cols="50"
           />

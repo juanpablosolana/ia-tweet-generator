@@ -1,12 +1,31 @@
+import { useState } from 'react'
 import Head from 'next/head'
-import Image from 'next/image'
 import { Inter } from '@next/font/google'
 import styles from '@/styles/Home.module.css'
-import {CATEGORIES}  from '@/services/categories'
+import { CATEGORIES } from '@/services/categories'
+import createTweet from '@/services/createTweet'
+import Loader from '@/components/Loader'
 
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
+
+  const [message, setMessage] = useState('👆👆👆 Select a category 👆👆👆')
+  const [isLoading, setIsLoading] = useState(false)
+
+  const handlerMagic = (e) => {
+    e.preventDefault()
+    setIsLoading(true)
+    createTweet(e.target[0].value)
+      .then((message) => {
+          setMessage(message)
+          setIsLoading(false)
+      })
+      .catch((error) => {
+        setMessage(error.message)
+        setIsLoading(false)
+      })
+  }
   return (
     <>
       <Head>
@@ -18,97 +37,54 @@ export default function Home() {
       <main className={styles.main}>
         <div className={styles.description}>
           <p>
-            Amazing tweet generator&nbsp;
-            <code className={styles.code}>BETA</code>
+            Amazing tweet&nbsp;
+            <code className={styles.code}>generator</code>
           </p>
           <div>
-            <a
-              href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              By{' '}
-              <Image
-                src="/vercel.svg"
-                alt="Vercel Logo"
-                className={styles.vercelLogo}
-                width={100}
-                height={24}
-                priority
-              />
-            </a>
+          <label>BETA</label>
           </div>
         </div>
 
         <div className={styles.center}>
-          <label>Select a category to get a amazing tweet!</label> <br />
+          <label>Select a category to get an amazing tweet!</label> <br />
           <div className={styles.thirteen}>
-            <datalist id="data">
-              {
-                CATEGORIES.map((item) => {
-                  return <option key={item.value} value={item.label} />
-                })
-              }
-            </datalist>
-            <input type="text" list="data" />
-            <button>Generate!</button>
+            {isLoading
+              ? <Loader />
+              : <form onSubmit={handlerMagic}>
+                <datalist id="data" >
+                  {
+                   CATEGORIES.map((item) => {
+                     return <option key={item.value} value={item.label} />
+                   })
+                  }
+               </datalist>
+               <input type="text" list="data" />
+               <button>Generate!</button>
+              </form>
+            }
+
           </div>
+          <textarea
+            id="amazingTweet"
+            name="amazingTweet"
+            value={message}
+            rows="8"
+            cols="50"
+          />
+          <button>Tweet!</button>
         </div>
         <div className={styles.grid}>
           <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
+            href="https://pablosolana.dev"
             className={styles.card}
             target="_blank"
             rel="noopener noreferrer"
           >
             <h2 className={inter.className}>
-              Docs <span>-&gt;</span>
+              Tweet generator <span>-&gt;</span>
             </h2>
             <p className={inter.className}>
-              Find in-depth information about Next.js features and&nbsp;API.
-            </p>
-          </a>
-
-          <a
-            href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2 className={inter.className}>
-              Learn <span>-&gt;</span>
-            </h2>
-            <p className={inter.className}>
-              Learn about Next.js in an interactive course with&nbsp;quizzes!
-            </p>
-          </a>
-
-          <a
-            href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2 className={inter.className}>
-              Templates <span>-&gt;</span>
-            </h2>
-            <p className={inter.className}>
-              Discover and deploy boilerplate example Next.js&nbsp;projects.
-            </p>
-          </a>
-
-          <a
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2 className={inter.className}>
-              Deploy <span>-&gt;</span>
-            </h2>
-            <p className={inter.className}>
-              Instantly deploy your Next.js site to a shareable URL
-              with&nbsp;Vercel.
+              By Pablo Solana | cohere IA.
             </p>
           </a>
         </div>

@@ -73,7 +73,6 @@
 }
 
 .center {
-  display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
@@ -104,17 +103,31 @@
   transform: translateZ(0);
 }
 
+.center textarea {
+  width: 100%;
+  height: 100%;
+  border: none;
+  background: transparent;
+  color: var(--text-color);
+  font-size:1rem;
+  font-family: var(--font-mono);
+  resize: none;
+  padding: 1rem;
+  overflow: hidden;
+  outline: none;
+  box-shadow: none;
+}
+
 .logo,
 .thirteen {
   position: relative;
 }
 
 .thirteen {
-  display: flex;
   justify-content: center;
   align-items: center;
   padding: 25px 10px;
-  margin-left: 16px;
+  margin: 16px;
   transform: translateZ(0);
   border-radius: var(--border-radius);
   overflow: hidden;
@@ -147,6 +160,18 @@
     rgba(var(--tile-end-rgb), 1)
   );
   background-clip: content-box;
+}
+.thirteen >button{
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 6px;
+  cursor: pointer;
+  gap: 1rem;
 }
 
 /* Enable hover only on non-touch devices */
@@ -245,6 +270,16 @@
       rgb(var(--background-end-rgb)) 40%
     );
     z-index: 1;
+  }
+  @keyframes loader {
+    0% {
+      transform: scale(0);
+      opacity: 1;
+    }
+    100% {
+      transform: scale(1);
+      opacity: 0;
+    }
   }
 }
 

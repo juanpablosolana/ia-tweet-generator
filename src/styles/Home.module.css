@@ -109,7 +109,7 @@
   border: none;
   background: transparent;
   color: var(--text-color);
-  font-size:1rem;
+  font-size:.8rem;
   font-family: var(--font-mono);
   resize: none;
   padding: 1rem;

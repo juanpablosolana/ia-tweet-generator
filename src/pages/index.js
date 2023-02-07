@@ -15,6 +15,7 @@ export default function Home() {
 
   const handlerMagic = (e) => {
     e.preventDefault()
+    if (e.target[0].value === '') return
     setIsLoading(true)
     createTweet(e.target[0].value)
       .then((message) => {
@@ -63,13 +64,9 @@ export default function Home() {
               </form>
             }
           </div>
-          <textarea
-            id="amazingTweet"
-            name="amazingTweet"
-            defaultValue={message}
-            rows="8"
-            cols="50"
-          />
+          <div className='max-w-md	my-4'>
+             <label className='gap-3'>{message}</label>
+            </div>
           <button>Tweet!</button>
         </div>
         <div className={styles.grid}>

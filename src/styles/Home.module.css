@@ -161,7 +161,7 @@
   );
   background-clip: content-box;
 }
-.thirteen >button{
+.thirteen button{
   border: none;
   color: white;
   padding: 15px 32px;

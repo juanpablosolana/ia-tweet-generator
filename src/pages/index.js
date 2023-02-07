@@ -27,6 +27,10 @@ export default function Home() {
         setIsLoading(false)
       })
   }
+
+  const handlerTweet = () => {
+    window.open(`https://twitter.com/intent/tweet?text=${message}`)
+  }
   return (
     <>
       <Head>
@@ -67,7 +71,7 @@ export default function Home() {
           <div className='max-w-md	my-4'>
              <label className='gap-3'>{message}</label>
             </div>
-          <button>Tweet!</button>
+          <button onClick={handlerTweet}>Tweet!</button>
         </div>
         <div className={styles.grid}>
           <a

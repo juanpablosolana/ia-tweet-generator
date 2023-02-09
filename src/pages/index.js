@@ -12,33 +12,29 @@ export default function Home() {
 
   const [message, setMessage] = useState('cohere AI')
   const [openAIMessage, setOpenAIMessage] = useState('open AI')
-  const [isCohereLoading, setIsCohereLoading] = useState(false)
-  const [isOpenAILoading, setIsOpenAILoading] = useState(false)
+  const [isLoding, setIsLoading] = useState(false)
+
 
   const handlerMagic = (e) => {
     e.preventDefault()
-    if (e.target[0].value === '') return
-    setIsCohereLoading(true)
-    setIsOpenAILoading(true)
-    createTweet('cohere',e.target[0].value)
-      .then((message) => {
-          setMessage(message)
-      })
-      .catch((error) => {
-        setMessage(error.message)
-      })
-      .finally(() => {
-        setIsCohereLoading(false)
-      })
-    createTweet('openai', e.target[0].value)
-      .then((message) => {
-        setOpenAIMessage(message)
+    const { value } = e.target[0]
+    if (value === '') return
+    const apis = [
+      createTweet('openai', value),
+      createTweet('cohere', value)
+    ]
+    setIsLoading(true)
+    Promise.all(apis)
+      .then(([openAIMessage,cohereMessage]) => {
+        setOpenAIMessage(openAIMessage)
+        setMessage(cohereMessage)
       })
       .catch((error) => {
         setOpenAIMessage(error.message)
+        setMessage(error.message)
       })
       .finally(() => {
-        setIsOpenAILoading(false)
+        setIsLoading(false)
       })
   }
 
@@ -68,7 +64,7 @@ export default function Home() {
         <div className={styles.center}>
           <label>Write a topic to get an amazing tweet!</label> <br />
           <div className={styles.thirteen}>
-            {isCohereLoading && isOpenAILoading
+            {isLoding
               ? <Loader />
               : <form onSubmit={handlerMagic}>
                   <datalist id="data" >
@@ -84,14 +80,13 @@ export default function Home() {
             }
           </div>
           <div className='max-w-md	my-4'>
-            <p>co:here:</p>
-           { isCohereLoading ? <Loader /> : <label className='gap-3'>{message}</label> }
+            <p>open AI (chat-gpt):</p>
+            {isLoding ? <Loader /> : <label className='gap-3'>{openAIMessage}</label>}
           </div>
           <div className='max-w-md	my-4'>
-            <p>open AI (chat-gpt):</p>
-            { isOpenAILoading ? <Loader /> : <label className='gap-3'>{openAIMessage}</label> }
+            <p>co:here:</p>
+           {isLoding ? <Loader /> : <label className='gap-3'>{message}</label> }
           </div>
-
         </div>
         <button onClick={handlerTweet}>Tweet!</button>
         <div className={styles.grid}>

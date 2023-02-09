@@ -50,7 +50,7 @@ export default function Home() {
     <>
       <Head>
         <title>Amazing tweet generator </title>
-        <meta name="description" content="NextJS + cohere IA API" />
+        <meta name="description" content="Tweet AI generator!" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
@@ -58,7 +58,7 @@ export default function Home() {
         <div className={styles.description}>
           <p>
             Amazing tweet&nbsp;
-            <code className={styles.code}>IA generator</code>
+            <code className={styles.code}>AI generator</code>
           </p>
           <div>
           <label>BETA</label>

@@ -10,32 +10,24 @@ const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
 
-  const [message, setMessage] = useState('cohere AI')
-  const [openAIMessage, setOpenAIMessage] = useState('open AI')
+  const [message, setMessage] = useState('Tweet generator')
   const [isLoding, setIsLoading] = useState(false)
-
 
   const handlerMagic = (e) => {
     e.preventDefault()
     const { value } = e.target[0]
     if (value === '') return
-    const apis = [
-      createTweet('openai', value),
-      createTweet('cohere', value)
-    ]
     setIsLoading(true)
-    Promise.all(apis)
-      .then(([openAIMessage,cohereMessage]) => {
-        setOpenAIMessage(openAIMessage)
-        setMessage(cohereMessage)
+    createTweet(value)
+      .then((message) => {
+        setMessage(message)
       })
       .catch((error) => {
-        setOpenAIMessage(error.message)
         setMessage(error.message)
       })
-      .finally(() => {
-        setIsLoading(false)
-      })
+    .finally(() => {
+      setIsLoading(false)
+    })
   }
 
   const handlerTweet = () => {
@@ -80,12 +72,7 @@ export default function Home() {
             }
           </div>
           <div className='max-w-md	my-4'>
-            <p>open AI (chat-gpt):</p>
-            {isLoding ? <Loader /> : <label className='gap-3'>{openAIMessage}</label>}
-          </div>
-          <div className='max-w-md	my-4'>
-            <p>co:here:</p>
-           {isLoding ? <Loader /> : <label className='gap-3'>{message}</label> }
+            {isLoding ? <Loader /> : <label className='gap-3'>{message}</label>}
           </div>
         </div>
         <button onClick={handlerTweet}>Tweet!</button>

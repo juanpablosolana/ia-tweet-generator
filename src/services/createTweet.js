@@ -1,5 +1,5 @@
-const createTweet = async (aiProvider,category) => {
-  const response = await fetch(`/api/${aiProvider}/${category}`);
+const createTweet = async (category) => {
+  const response = await fetch(`/api/${category}`);
   const { tweet: message } = await response.json();
   return message;
 }

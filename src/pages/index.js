@@ -10,21 +10,35 @@ const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
 
-  const [message, setMessage] = useState('👆👆👆 Write a topic 👆👆👆')
-  const [isLoading, setIsLoading] = useState(false)
+  const [message, setMessage] = useState('cohere AI')
+  const [openAIMessage, setOpenAIMessage] = useState('open AI')
+  const [isCohereLoading, setIsCohereLoading] = useState(false)
+  const [isOpenAILoading, setIsOpenAILoading] = useState(false)
 
   const handlerMagic = (e) => {
     e.preventDefault()
     if (e.target[0].value === '') return
-    setIsLoading(true)
-    createTweet(e.target[0].value)
+    setIsCohereLoading(true)
+    setIsOpenAILoading(true)
+    createTweet('cohere',e.target[0].value)
       .then((message) => {
           setMessage(message)
-          setIsLoading(false)
       })
       .catch((error) => {
         setMessage(error.message)
-        setIsLoading(false)
+      })
+      .finally(() => {
+        setIsCohereLoading(false)
+      })
+    createTweet('openai', e.target[0].value)
+      .then((message) => {
+        setOpenAIMessage(message)
+      })
+      .catch((error) => {
+        setOpenAIMessage(error.message)
+      })
+      .finally(() => {
+        setIsOpenAILoading(false)
       })
   }
 
@@ -54,23 +68,28 @@ export default function Home() {
         <div className={styles.center}>
           <label>Write a topic to get an amazing tweet!</label> <br />
           <div className={styles.thirteen}>
-            {isLoading
+            {isCohereLoading && isOpenAILoading
               ? <Loader />
               : <form onSubmit={handlerMagic}>
-                <datalist id="data" >
-                  {
-                   CATEGORIES.map((item) => {
-                     return <option key={item.value} value={item.label} />
-                   })
-                  }
-               </datalist>
-               <input type="text" list="data" />
-               <button>Generate!</button>
+                  <datalist id="data" >
+                    {
+                    CATEGORIES.map((item) => {
+                      return <option key={item.value} value={item.label} />
+                    })
+                    }
+                  </datalist>
+                  <input type="text" list="data" />
+                <button>Generate!</button>
               </form>
             }
           </div>
           <div className='max-w-md	my-4'>
-            <label className='gap-3'>{message}</label>
+            <p>co:here:</p>
+           { isCohereLoading ? <Loader /> : <label className='gap-3'>{message}</label> }
+          </div>
+          <div className='max-w-md	my-4'>
+            <p>open AI (chat-gpt):</p>
+            { isOpenAILoading ? <Loader /> : <label className='gap-3'>{openAIMessage}</label> }
           </div>
 
         </div>

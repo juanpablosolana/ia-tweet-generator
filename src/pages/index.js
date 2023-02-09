@@ -10,7 +10,7 @@ const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
 
-  const [message, setMessage] = useState('👆👆👆 Select a category 👆👆👆')
+  const [message, setMessage] = useState('👆👆👆 Write a topic 👆👆👆')
   const [isLoading, setIsLoading] = useState(false)
 
   const handlerMagic = (e) => {
@@ -44,7 +44,7 @@ export default function Home() {
         <div className={styles.description}>
           <p>
             Amazing tweet&nbsp;
-            <code className={styles.code}>generator</code>
+            <code className={styles.code}>IA generator</code>
           </p>
           <div>
           <label>BETA</label>
@@ -52,7 +52,7 @@ export default function Home() {
         </div>
 
         <div className={styles.center}>
-          <label>Select a category to get an amazing tweet!</label> <br />
+          <label>Write a topic to get an amazing tweet!</label> <br />
           <div className={styles.thirteen}>
             {isLoading
               ? <Loader />
@@ -86,7 +86,7 @@ export default function Home() {
               Tweet generator <span>-&gt;</span>
             </h2>
             <p className={inter.className}>
-              By Pablo Solana | cohere IA.
+              By Pablo Solana
             </p>
           </a>
         </div>

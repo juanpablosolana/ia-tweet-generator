@@ -1,7 +1,7 @@
 const cohereData = (magic) => {
   return {
     model: 'command-xlarge-nightly',
-    prompt: `Write a tweet no more 250 characters about ${magic}`,
+    prompt: `create a tweet about ${magic}`,
     max_tokens: 300,
     temperature: 0.9,
     k: 0,

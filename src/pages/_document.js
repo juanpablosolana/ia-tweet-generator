@@ -1,5 +1,5 @@
 import { Html, Head, Main, NextScript } from 'next/document'
-import { GTMnoscript } from '@/components/Gtag'
+import { GTMnoscript } from '@/services/gtag'
 
 export default function Document() {
   return (

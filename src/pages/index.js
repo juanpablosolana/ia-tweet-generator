@@ -2,16 +2,18 @@ import { useState } from 'react'
 import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
-import { CATEGORIES } from '@/services/categories'
 import createTweet from '@/services/createTweet'
 import Loader from '@/components/Loader'
+import TextSkeletor from '@/components/TextSkeletor'
+import ImageSkeletor from '@/components/TextSkeletor'
 import DataList from '@/components/DataList'
+import { imageDefaultUrl } from '@/constant'
 
 export default function Home() {
 
   const [message, setMessage] = useState('Tweet generator')
   const [isLoding, setIsLoading] = useState(false)
-  const [imgGenerator, setImgGenerator] = useState('https://openai-labs-public-images-prod.azureedge.net/user-tCPvTKI6Pso3HGPyZ1f2Xsej/generations/generation-MYtnZb2JIvgSLqbMkBRbrZMk/image.webp')
+  const [imgGenerator, setImgGenerator] = useState(imageDefaultUrl)
 
   const handlerMagic = (e) => {
     e.preventDefault()
@@ -20,15 +22,14 @@ export default function Home() {
     setIsLoading(true)
     Promise.all([
       createTweet('tweet', value),
-      createTweet('images', value)
+      createTweet('image', value)
     ])
       .then(([message, imgGenerator]) => {
         setMessage(message)
         setImgGenerator(imgGenerator)
       })
       .catch((error) => {
-        console.error(error)
-        setMessage('Error, IA timeout or invalid category')
+        setMessage('Error, IA timeout or invalid category', error)
       })
       .finally(() => {
         setIsLoading(false)
@@ -36,7 +37,7 @@ export default function Home() {
   }
 
   const handlerTweet = () => {
-    window.open(`https://twitter.com/intent/tweet?text=${message}`)
+    window.open(`https://twitter.com/intent/tweet?text=${message}&&image=${imgGenerator}`)
   }
 
   return (
@@ -62,15 +63,23 @@ export default function Home() {
             <p className="max-w-2xl mb-6 font-light text-gray-500 lg:mb-8 md:text-lg lg:text-xl dark:text-gray-400">Tweet Generator is a project to generate artificially intelligent tweets. <br/>The project uses natural language processing and deep learning algorithms to generate tweets that are similar to what humans would write. <br/> The project is currently in early stages of development, but it is a promising start for automated tweet generation.</p>
             {isLoding
               ? <Loader />
-              : <DataList handlerMagic={handlerMagic} CATEGORIES={CATEGORIES} />
+              : <DataList handlerMagic={handlerMagic} />
             }
           </div>
           <div className="py-2 lg:mt-0 lg:col-span-5 lg:flex items-center flex-col gap-4">
             {
-              isLoding ? <Loader /> : <Image src={imgGenerator} width={400} height={400} alt='Image create by AI' className='rounded-lg'/>
+              isLoding
+                ? <ImageSkeletor />
+                : <Image src={imgGenerator} width={400} height={400} alt='Image create by AI' className='rounded-lg' priority={true} />
             }
-            {isLoding? <Loader/>:<p>{message}</p>}
-            <button onClick={handlerTweet} classNameName= "inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-gray-900 rounded-lg border border-gray-300 hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 dark:text-white dark:border-gray-700 dark:hover:bg-gray-700 dark:focus:ring-gray-800">Share tweet!</button>
+            {
+              isLoding
+                ? < TextSkeletor />
+                : <p className="text-xl font-semibold text-gray-900 dark:text-white">{message}</p>
+            }
+            {
+              !isLoding && <button onClick={handlerTweet} className="inline-flex justify-center items-center py-3 px-5 my-5 text-base font-medium text-center text-gray-900 rounded-lg border border-gray-300 hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 dark:text-white dark:border-gray-700 dark:hover:bg-gray-700 dark:focus:ring-gray-800">Share on Twitter!</button>
+            }
           </div>
         </div>
       </section>
@@ -80,7 +89,7 @@ export default function Home() {
             <Image src={imgGenerator} className="mr-3 h-6 sm:h-9 rounded-full" alt="Tweet generator Logo" width={50} height={50} />
             Tweet Generator
           </footer>
-          <p className="my-6 text-gray-500 dark:text-gray-400">Amazing AI tweet generation</p>
+          <p className="my-6 text-gray-500 dark:text-gray-400">Amazing AI tweet generation | BETA</p>
           <span className="text-sm text-gray-500 sm:text-center dark:text-gray-400">Developed by <Link href="https://pablosolana.dev" className="hover:underline">Pablo Solana</Link></span>
         </div>
       </footer>

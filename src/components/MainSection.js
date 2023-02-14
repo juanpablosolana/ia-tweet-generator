@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import Loader from '@/components/Loader'
 import TextSkeletor from '@/components/TextSkeletor'
-import ImageSkeletor from '@/components/TextSkeletor'
+import ImageSkeletor from '@/components/ImageSkeletor'
 import DataList from '@/components/DataList'
 
 export default function MainSection ({ handlerMagic, isLoding, imgGenerator, message, handlerTweet }) {

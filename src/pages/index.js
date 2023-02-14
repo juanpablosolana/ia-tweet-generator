@@ -6,8 +6,7 @@ import Header from '@/components/Header'
 import MainSection from '@/components/MainSection'
 import HeadSEO from '@/components/Head'
 
-export default function Home() {
-
+export default function Home () {
   const [message, setMessage] = useState('Tweet generator')
   const [isLoding, setIsLoading] = useState(false)
   const [imgGenerator, setImgGenerator] = useState(imageDefaultUrl)
@@ -39,8 +38,8 @@ export default function Home() {
 
   return (
     <>
-      <HeadSEO/>
-      <Header imgGenerator={imgGenerator}/>
+      <HeadSEO />
+      <Header imgGenerator={imgGenerator} />
       <MainSection
         imgGenerator={imgGenerator}
         isLoding={isLoding}

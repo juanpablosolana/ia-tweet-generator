@@ -1,18 +1,21 @@
 import { Configuration, OpenAIApi } from 'openai'
-import { openaiData } from '@/services/ia';
+import { openaiData } from '@/services/ia'
 
-const configuration = new Configuration({apiKey: process.env.OPENAI_API_KEY,});
-const openai = new OpenAIApi(configuration);
+const configuration = new Configuration({ apiKey: process.env.OPENAI_API_KEY })
+const openai = new OpenAIApi(configuration)
 
+<<<<<<< Updated upstream
 export default async function handler(req, res) {
+=======
+export default async function handler (req, res) {
+>>>>>>> Stashed changes
   if (req.method !== 'GET') return res.status(405).send({})
 
   const { magic } = req.query
   try {
-    const response = await openai.createCompletion(openaiData(magic));
-    res.send({ tweet: response.data.choices[0].text });
-  }
-  catch (error) {
-    res.status(503).send({ tweet:'Error, IA timeout or invalid category'});
+    const response = await openai.createCompletion(openaiData(magic))
+    res.send({ tweet: response.data.choices[0].text })
+  } catch (error) {
+    res.status(503).send({ tweet: 'Error, IA timeout or invalid category' })
   }
 }

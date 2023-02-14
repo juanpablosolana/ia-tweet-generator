@@ -1,9 +1,9 @@
 import { Html, Head, Main, NextScript } from 'next/document'
 import { GTMnoscript } from '@/services/gtag'
 
-export default function Document() {
+export default function Document () {
   return (
-    <Html lang="en">
+    <Html lang='en'>
       <Head />
       <body>
         <GTMnoscript />

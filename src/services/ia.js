@@ -1,6 +1,6 @@
 const createImage = (magic) => {
   return {
-    prompt: `Robot tweet a ${magic}`,
+    prompt: `${magic} modern art`,
     n: 2,
     size: '256x256'
   }

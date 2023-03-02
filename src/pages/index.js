@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import createTweet from '@/services/createTweet'
-import { imageDefaultUrl } from '@/constant'
+import { logo } from '@/constant'
 import Footer from '@/components/Footer'
 import Header from '@/components/Header'
 import MainSection from '@/components/MainSection'
@@ -9,7 +9,7 @@ import HeadSEO from '@/components/Head'
 export default function Home () {
   const [message, setMessage] = useState('Tweet generator')
   const [isLoding, setIsLoading] = useState(false)
-  const [imgGenerator, setImgGenerator] = useState(imageDefaultUrl)
+  const [imgGenerator, setImgGenerator] = useState(logo)
 
   const handlerMagic = (e) => {
     e.preventDefault()
@@ -39,7 +39,7 @@ export default function Home () {
   return (
     <>
       <HeadSEO />
-      <Header imgGenerator={imgGenerator} />
+      <Header />
       <MainSection
         imgGenerator={imgGenerator}
         isLoding={isLoding}
@@ -47,7 +47,7 @@ export default function Home () {
         handlerMagic={handlerMagic}
         handlerTweet={handlerTweet}
       />
-      <Footer imgGenerator={imgGenerator} />
+      <Footer />
     </>
   )
 }

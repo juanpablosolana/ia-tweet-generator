@@ -10,6 +10,9 @@ export default function Footer ({ imgGenerator }) {
             <Image src={imgGenerator} className='mr-3 h-6 sm:h-9 rounded-full' alt='Tweet generator Logo' width={50} height={50} />
           </Link>
           Tweet Generator
+          <Link href='https://play.google.com/store/apps/details?id=com.tweetAIGenerator'>
+            <Image src='/google-play-badge.png' alt='Google play badge' width={150} height={50} />
+          </Link>
         </div>
         <p className='my-6 text-gray-500 dark:text-gray-400'>Amazing AI tweet generation | BETA</p>
         <span className='text-sm text-gray-500 sm:text-center dark:text-gray-400'>
@@ -18,6 +21,7 @@ export default function Footer ({ imgGenerator }) {
             Privacy Policy
           </Link>
         </span>
+
       </div>
     </footer>
   )

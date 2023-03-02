@@ -10,7 +10,7 @@ export default function Footer ({ imgGenerator }) {
             <Image src={imgGenerator} className='mr-3 h-6 sm:h-9 rounded-full' alt='Tweet generator Logo' width={50} height={50} />
           </Link>
           Tweet Generator
-          <Link href='https://play.google.com/store/apps/details?id=com.tweetAIGenerator'>
+          <Link href='https://play.google.com/store/apps/details?id=com.tweetAIGenerator' target='_blank' rel='noreferrer'>
             <Image src='/google-play-badge.png' alt='Google play badge' width={150} height={50} />
           </Link>
         </div>

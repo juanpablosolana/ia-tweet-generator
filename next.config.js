@@ -4,15 +4,15 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: '**.azureedge.net',
+        hostname: '**.azureedge.net'
       },
       {
         protocol: 'https',
-        hostname: '**.windows.net',
-      },
-    ],
+        hostname: '**.windows.net'
+      }
+    ]
   },
-  reactStrictMode: true,
+  reactStrictMode: true
 }
 
 module.exports = nextConfig

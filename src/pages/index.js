@@ -5,6 +5,7 @@ import Footer from '@/components/Footer'
 import Header from '@/components/Header'
 import MainSection from '@/components/MainSection'
 import HeadSEO from '@/components/Head'
+import AdBanner from '@/components/AdBanner'
 
 export default function Home () {
   const [message, setMessage] = useState('Tweet generator')
@@ -46,6 +47,11 @@ export default function Home () {
         message={message}
         handlerMagic={handlerMagic}
         handlerTweet={handlerTweet}
+      />
+      <AdBanner
+        data-ad-slot='2296264031'
+        data-ad-format='auto'
+        data-full-width-responsive='true'
       />
       <Footer />
     </>

@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@loglib/tracker": "^0.4.3",
     "@next/font": "13.1.6",
     "@vercel/analytics": "^0.1.8",
     "eslint": "8.33.0",
